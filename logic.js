@@ -5,43 +5,62 @@
 var wordsList = ["Bart", "Homer", "Marge", "Lisa", "Maggie", "Krusty the Clown", "Sideshow Bob", "Milhouse", "Comic Book Guy"];
 
 // Computer selected solution will be held here.
-var word = Math.floor(Math.random())
+var word;
 // This will break the solution into individual letters to be stored in array.
+var wordArray;
 // This will be the number of blanks we show based on the solution.
 // Holds a mix of blank and solved letters (ex: 'n, _ _, n, _').
+var blanks = [];
 // Holds all of the wrong guesses.
+var wrongGuess = [];
 // Holds the letters guessed
+var lettersGuessed = [];
 // Game counters for wins, losses, ties
-
+var guessesLeft;
+var wins;
+var loss;
 // FUNCTIONS (These are bits of code that we will call upon to run when needed).
 // ==================================================================================================
 
-// startGame()
+ startGame()
 // It's how we we will start and restart the game.
 // (Note: It's not being run here. Function declarations like this are made for future use.)
 function startGame() {
 
     // Reset the guesses back to 0.
+    guessesLeft = 9;
     // Solution chosen randomly from wordList.
+    word = wordsList[Math.floor(Math.random() * wordsList.length)];
     // The word is broken into individual letters.
+    wordArray = word.split('');
     // We count the number of letters in the word.
     // We print the solution in console (for testing).
+    console.log(wordArray);
 
     // CRITICAL LINE
     // Here we *reset* the guess and success array at each round.
+    lettersGuessed = [];
 
     // CRITICAL LINE
     // Here we *reset* the wrong guesses from the previous round.
-
+    wrongGuess = [];
     // Fill up the blanksAndSuccesses list with appropriate number of blanks.
+    for(i = 0; i < wordArray.length; i++){
+        if(wordArray[i] == " "){
+            blanks.push("&nbsp;");
+        }
+        else{
+            blanks.push("_");
+        }
+    }
     // This is based on number of letters in solution.
 
     // Print the initial blanks in console.
-
+    console.log(blanks);
     // Reprints the guessesLeft to 9.
-
+    console.log(guessesLeft);
     // Prints the blanks at the beginning of each round in the HTML.
-
+    $("#word-blanks").html(blanks.join(" "));
     // Clears the wrong guesses from the previous round.
 }
 
